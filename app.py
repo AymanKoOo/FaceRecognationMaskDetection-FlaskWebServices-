@@ -35,11 +35,7 @@ if __name__ == '__main__':
 #https://www.youtube.com/watch?v=5co5C3jmTWI
 ####
 ## After watching 
-## TO push to Master 
-
-## git add . 
-## git commit -m "Write ur message here explaing what u did"
-## git push origin main
+## push to branch called "sendAll" 
 
 ### you will notice File .gitignore  it ignores pushing python virtual environmet so it dosen't push python libraries
 

@@ -41,6 +41,6 @@ if __name__ == '__main__':
 ## git commit -m "Write ur message here explaing what u did"
 ## git push origin main
 
-### U will notice File .gitignore  it ignores pushing python virtual environmet so it dosen't push python libraries
+### you will notice File .gitignore  it ignores pushing python virtual environmet so it dosen't push python libraries
 
 

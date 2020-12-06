@@ -1,42 +1,26 @@
 from flask import Flask
-
+from csv_op import csv
+from SqlParser import SqlParser
 app = Flask(__name__)
 
 
-
-### Please keep this page clean ,, Create classes for ur work then call them here
-
-#Like i did below
-
-from FaceRecognation import DeepLearning # import class
-obj1 = DeepLearning() # create object
-
+#obj1 = csv() # create object
+parser = SqlParser()
 @app.route('/')
 def index():
-    return "hello world"
+    return "Welcome To SQL Parser"
 
-@app.route('/mask')
-def mask():
-     return obj1.Mask_Detection() # Call the method
+
+@app.route('/select')
+def select():
+      #upload file get its name
+      s = csv("student.csv") # create object
+      text = "select last_name from student"
+      result = parser.unittest_parser(text)
+      print(result[0])
+      print(s.select(result[0]))
+      return "done"
  
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-###########################Please Read THiss#################################################################
-#After cloning this project
-#All python libraries are in requirments.txt 
-#so u must create virtual env to install theses libires from requirments.txt
-## so watch this video https://www.youtube.com/watch?v=mBcmdcmZXJg
-
-
-#Watch This
-#https://www.youtube.com/watch?v=2QP4QxzG-wY
-#https://www.youtube.com/watch?v=5co5C3jmTWI
-####
-## After watching 
-## push to branch called "sendAll" 
-
-### you will notice File .gitignore  it ignores pushing python virtual environmet so it dosen't push python libraries
-
-

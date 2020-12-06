@@ -1,7 +1,7 @@
 import pandas as pd
 import operator
 
-class csv :
+class csvv :
     def __init__(self,path):
         self.path=path
         try:
@@ -50,13 +50,16 @@ class csv :
             #     for i in range(len(nodes[1])):
             #         nodes[1][i]=names[nodes[1][i]]
             try:
-                
+                #print(self.data)
+                #print(self.data[nodes[1]])
                 Selecteddata = self.data[nodes[1]]
+                
+                #print(Selecteddata)
                 return Selecteddata
-            except:
-                return "Check Column name"
+            except Exception as e:       
+                     print(e)
 
-# s=csv("student.csv")  
+#s=csvv("QIRK5S.csv")  
 
 # # return data
 # print(s.select(('select', '*', 'student', None, None)))
@@ -65,3 +68,7 @@ class csv :
 #s.select(('select', [0, 1], 'student', ('=', 'first_name', 'Doe'), None))
 #s.select(('select', ['id', 'first_name'], 'student', ('=', 'first_name', 'Doe'), None))
 
+
+#s.select(('select', ['Revised'], 'emp', None, None))
+
+#print(s.select(('select', ['first_name'], 'student', None, None)))

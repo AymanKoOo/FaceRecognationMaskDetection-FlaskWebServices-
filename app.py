@@ -28,6 +28,7 @@ def allowed_file(filename):
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
+
 @app.route('/uploader', methods = ['POST','GET'])
 def uploader():
 
@@ -41,14 +42,14 @@ def uploader():
               #  f.save(secure_filename(f.filename))
                 id = id_generator()
                 f.save(os.path.join('CSVFiles',id+'.csv'))
-                
+
                 results = []
                 reader = csv.DictReader(open('CSVFiles/'+id+'.csv'))
                 for row in reader:
                     results.append(dict(row))
-                print(results)
+                #print(results)
                 fieldnames = [key for key in results[0].keys()]
-
+                
                 return render_template('app.html', results=results, fieldnames=fieldnames, len=len,id=id)
                 
             else:
@@ -58,30 +59,37 @@ def uploader():
 
                 #print(request.form['fileID'])
                 # s=csv("student.csv")  
-                csvFile = 'CSVFiles/'+request.form['fileID']+'.csv'
+              
+                fileName=request.form['fileID']
+                if not fileName:
+                    fileName=request.form['fileIDD']
+
+                csvFile = 'CSVFiles/'+fileName+'.csv'
                 s = csvv(csvFile) # create object
                 text = request.form['query']
                 result = parser.unittest_parser(text)
-                print(result[0])
-
-                resultQuery = s.select(result[0])
-                print(resultQuery)
+               # print(result[0])
+                try:
+                    resultQuery = s.select(result[0])
+                    code = s.generateCode(result[0])
+                except:
+                     return render_template('error.html')
+               # print(resultQuery)
                 results = []
                 
-               
                 resultQuery.to_csv('queryy.csv', encoding='utf-8', index=False)
-               
+                
                 reader = csv.DictReader(open('queryy.csv'))
                 for row in reader:
                      results.append(dict(row))
-                print(results)
+                #print(results)
                 fieldnames = [key for key in results[0].keys()]
 
-                return render_template('app.html', results=results, fieldnames=fieldnames, len=len)
+                return render_template('app.html', results=results, fieldnames=fieldnames, len=len,code=code,fileName=fileName)
                 #return "done"
                 
             
-           
+   
 if __name__ == '__main__':
     app.run(debug=True)
 

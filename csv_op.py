@@ -4,14 +4,19 @@ import operator
 class csvv :
     def __init__(self,path):
         self.path=path
+        
         try:
            
             self.data =  pd.read_csv(path)
+            self.data.columns = map(str.lower, self.data.columns)
+            print(self.data)
             #print(self.data.head())
+            
+            
         except FileNotFoundError as ex:
             print(ex)
+          
 
-        print("#################")
     
     def operator_fn(self,op):
         return{
@@ -36,12 +41,15 @@ class csvv :
         return df[self.operator_fn(condition[0])(df[condition[1]],condition[2])]
     
     def select(self,nodes):
+        
+        print("aa")
         if(nodes[3]):
             self.data = self.search_condition(self.data,nodes[3])
         if(nodes[4]):
             data=data.sort_values(by=nodes[4])
 
         if nodes[1][0]=='*':
+
                     return self.data
                 
         if(type(nodes[1]) is list):
@@ -56,8 +64,16 @@ class csvv :
                 
                 #print(Selecteddata)
                 return Selecteddata
-            except Exception as e:       
+            except Exception as e:   
                      print(e)
+        
+    def generateCode(self,nodes):  
+            code = (f"import from csv_op import csvv\n"
+                    f" s=csvv('FileName.csv')'.\n"
+                    f" query = s.select({nodes}).")
+
+            return code 
+                   
 
 #s=csvv("QIRK5S.csv")  
 

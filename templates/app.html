@@ -21,21 +21,57 @@
     <script type = "text/javascript"  src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type = "text/javascript"  src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script type = "text/javascript"  src="https://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
-  </head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+</head>
   <body>
-    <form method="POST" action="" enctype="multipart/form-data">
-        <p><input type="file" name="file"></p>
-        <p><input type="submit" id="load_data" value="Submit"></p>
-    </form>
 
-   
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand" href="#">Compiler Project CSV by SQL</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+        
+            
+          </ul>
+      </div>
+  </nav>
+    <center>
+    
+      <h1>Query on CSV File using SQL</h1>
+      <h3>&</h3>
+      <h2>Generate python Code</h2>
+      <br />
+  
+  
+
+      <form method="POST" action="" enctype="multipart/form-data">
+        <p><input class="btn btn-danger" type="file" name="file"></p>
+
+        
+
+       
+        <label for="upload">Upload CSV File </label>
+
+        <p><input class="btn btn-success" type="submit" id="load_data" value="Add"></p>
+
+        <code>{{code}}</code>
+      </form>
+    </center>
+
     <div class="card">
       <div class="card-body">
         <form action="{{ url_for('uploader')}}" method="post">
             <textarea class="form-control" rows="5" name="query"></textarea>
             <input type="hidden"  name="fileID"  value={{id}}>
-            <input type="submit">
+            <input type="hidden"  name="fileIDD"  value={{fileName}}>
+            <input class="btn btn-success" value="Run Query" type="submit">
         </form>
+
 
         <div class="mt-4">
           {% if request.method == 'POST'%}
